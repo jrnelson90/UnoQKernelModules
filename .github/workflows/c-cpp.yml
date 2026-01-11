@@ -1,0 +1,21 @@
+name: C/C++ CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    - name: Download
+      run: git clone https://github.com/arduino/linux-qcom.git && cd linux-qcom
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: make check
+      run: make check
+    - name: make distcheck
+      run: make distcheck
