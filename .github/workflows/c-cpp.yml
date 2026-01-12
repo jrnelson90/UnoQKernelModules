@@ -21,7 +21,7 @@ jobs:
     - name: Copy .config file to source repo  
       run: cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom
     - name: Setup make configs
-      run: /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
+      run: cd /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
     - name: make moudules_prepare
       run: make -C . M=./drivers/usb/misc moudules_prepare
     - name: make moudules
