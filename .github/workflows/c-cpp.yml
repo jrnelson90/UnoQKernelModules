@@ -17,7 +17,9 @@ jobs:
       uses: actions/checkout@v4
       with: 
        repository: arduino/linux-qcom
-       # path: linux-qcom
+       path: linux-qcom
+    - name: Inspect files in /home/runner/work/UnoQKernelModules
+      run: ls /home/runner/work/UnoQKernelModules
     - name: Copy .config file to source repo  
       run: cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b /home/runner/work/UnoQKernelModules/linux-qcom
     - name: Setup make configs
