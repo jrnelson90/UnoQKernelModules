@@ -13,6 +13,8 @@ jobs:
       run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
     - name: Checkout this repository
       uses: actions/checkout@v4
+    - name: cd to /home/runner/work/UnoQKernelModules
+      run: cd /home/runner/work/UnoQKernelModules
     - name: Checkout kernel source repo
       uses: actions/checkout@v4
       with: 
