@@ -22,7 +22,14 @@ jobs:
       run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
     - name: Setup make configs
       run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
-    - name: make moudules_prepare
-      run: cd linux-qcom && make -C . M=./drivers/usb/misc moudules_prepare
-    - name: make moudules
-      run: cd linux-qcom && make -j$(nproc) -C . M=./drivers/usb/misc moudules
+    - name: make prepare
+      run: cd linux-qcom && make -C . M=./drivers/usb/misc prepare
+    - name: make modules_prepare
+      run: cd linux-qcom && make -C . M=./drivers/usb/misc modules_prepare
+    - name: make modules
+      run: cd linux-qcom && make -j$(nproc) -C . M=./drivers/usb/misc modules
+    - name: Upload LEGO USB Tower driver kernel module as an artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: legousbtower.ko
+        path: linux-qcom/drivers/usb/misc/legousbtower.ko
