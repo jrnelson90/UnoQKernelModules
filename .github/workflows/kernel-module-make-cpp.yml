@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Arduino Uno Q Linux Kernel Module Make C/C++ CI
 
 on:
   workflow_dispatch:
