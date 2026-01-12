@@ -19,7 +19,9 @@ jobs:
        repository: arduino/linux-qcom
        path: linux-qcom
     - name: Copy .config file to source repo  
-      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config && cp -f Makefile ./linux-qcom/drivers/usb/misc/
+      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
+    # - name: Copy Makefile file to source repo  
+    #   run: cp -f Makefile ./linux-qcom/drivers/usb/misc/
     - name: Setup make configs
       run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --set-str CONFIG_USB_LEGOTOWER "m"
     - name: make prepare
@@ -27,7 +29,7 @@ jobs:
     - name: make modules_prepare
       run: cd linux-qcom && make modules_prepare
     - name: make modules
-      run: cd linux-qcom/drivers/usb/misc && make all
+      run: cd linux-qcom && make -j$(nproc) -C . modules
     - name: Upload LEGO USB Tower driver kernel module as an artifact
       uses: actions/download-artifact@v4
       with:
