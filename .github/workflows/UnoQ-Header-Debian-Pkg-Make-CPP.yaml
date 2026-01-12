@@ -1,0 +1,47 @@
+name: Arduino Uno Q Linux Kernel Headers Make C/C++ CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    - name: Install Linux Kernel Make deps
+      run: sudo apt-get update && sudo apt-get install build-essential bc dkms bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync packaging-dev wget
+    - name: Checkout this repository
+      uses: actions/checkout@v4
+    - name: Checkout kernel source repo
+      uses: actions/checkout@v4
+      with: 
+       repository: arduino/linux-qcom
+       path: linux-qcom
+    - name: Clean source tree
+      run: cd linux-qcom && make mrproper
+    - name: Copy .config file to source repo  
+      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
+    - name: Setup make configs
+      run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --set-str CONFIG_USB_LEGOTOWER "m"
+    - name: make prepare
+      run: cd linux-qcom && make prepare
+    # - name: make modules_prepare
+    #   run: cd linux-qcom && make modules_prepare
+    - name: make and create .deb packages for headers, image, and libc-dev
+      run: nice make -j$(nproc) -C ./linux-qcom bindeb-pkg
+    - name: Upload linux kernel headers .deb packages as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-headers-6.16.7-g0dd6551ae96b.deb
+        path: ./linux-headers-*.deb
+    - name: Upload linux kernel image .deb packages as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-image-6.16.7-g0dd6551ae96b.deb
+        path: ./linux-image-*.deb
+    - name: Upload linux kernel libc-dev .deb packages as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: linux-libc-dev-6.16.7-g0dd6551ae96b.deb
+        path: ./linux-libc-dev-*.deb
