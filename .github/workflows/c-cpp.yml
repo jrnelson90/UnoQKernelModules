@@ -21,11 +21,11 @@ jobs:
     - name: Copy .config file to source repo  
       run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
     - name: Setup make configs
-      run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
+      run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --set-str CONFIG_USB_LEGOTOWER "m"
     - name: make prepare
       run: cd linux-qcom && make prepare
     - name: make modules_prepare
-      run: cd linux-qcom && make -C . M=./drivers/usb/misc modules_prepare
+      run: cd linux-qcom && make modules_prepare
     - name: make modules
       run: cd linux-qcom && make -j$(nproc) -C . M=./drivers/usb/misc modules
     - name: Upload LEGO USB Tower driver kernel module as an artifact
