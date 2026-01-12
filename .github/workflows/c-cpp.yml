@@ -11,8 +11,8 @@ jobs:
     steps:
     - name: Checkout this repository
       uses: actions/checkout@v4
-    - name: Download Uno Q Kernel Source
-      run: git clone https://github.com/arduino/linux-qcom.git && cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b linux-qcom && cd linux-qcom
+    #- name: Download Uno Q Kernel Source
+    #  run: git clone https://github.com/arduino/linux-qcom.git && cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b linux-qcom && cd linux-qcom
     - name: Checkout kernel source repo
       uses: actions/checkout@v4
       with: 
