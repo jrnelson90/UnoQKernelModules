@@ -19,7 +19,7 @@ jobs:
        repository: arduino/linux-qcom
        path: linux-qcom
     - name: Copy .config file to source repo  
-      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
+      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config && cp -f Makefile ./linux-qcom/drivers/usb/misc/
     - name: Setup make configs
       run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --set-str CONFIG_USB_LEGOTOWER "m"
     - name: make prepare
