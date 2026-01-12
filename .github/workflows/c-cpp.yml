@@ -19,10 +19,10 @@ jobs:
        repository: arduino/linux-qcom
        path: linux-qcom
     - name: Copy .config file to source repo  
-      run: cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom
+      run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom
     - name: Setup make configs
-      run: cd /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
+      run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
     - name: make moudules_prepare
-      run: make -C . M=./drivers/usb/misc moudules_prepare
+      run: cd linux-qcom && make -C . M=./drivers/usb/misc moudules_prepare
     - name: make moudules
-      run: make -j$(nproc) -C . M=./drivers/usb/misc moudules
+      run: cd linux-qcom && make -j$(nproc) -C . M=./drivers/usb/misc moudules
