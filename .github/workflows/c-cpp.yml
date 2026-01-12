@@ -9,13 +9,11 @@ jobs:
     runs-on: ubuntu-24.04-arm
 
     steps:
-    - name: Download
-      run: git clone https://github.com/arduino/linux-qcom.git && cd linux-qcom
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Download Uno Q Kernel Source
+      run: git clone https://github.com/arduino/linux-qcom.git && cp UnoQKernelModules/config-6.16.7-g0dd6551ae96b linux-qcom && cd linux-qcom
     - name: Install deps
       run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+    - name: make moudules
+      run: make moudules
