@@ -27,7 +27,7 @@ jobs:
     - name: make modules_prepare
       run: cd linux-qcom && make modules_prepare
     - name: make modules
-      run: cd linux-qcom && make -j$(nproc) -C . M=./drivers/usb/misc modules
+      run: cd linux-qcom/drivers/usb/misc && make all
     - name: Upload LEGO USB Tower driver kernel module as an artifact
       uses: actions/download-artifact@v4
       with:
