@@ -16,4 +16,4 @@ jobs:
     - name: Install deps
       run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
     - name: make moudules
-      run: scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && make -C . -M=./drivers/usb/misc moudules
+      run: scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --set-str CONFIG_USB_LEGOTOWER "y" && make -C . -M=./drivers/usb/misc moudules
