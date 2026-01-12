@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Install Linux Kernel Make deps
-      run: sudo apt-get update && sudo apt-get install build-essential bc dkms bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync packaging-dev wget
+      run: sudo apt-get update && sudo apt-get install build-essential bc dkms bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync packaging-dev wget libdw-dev
     - name: Checkout this repository
       uses: actions/checkout@v4
     - name: Checkout kernel source repo
