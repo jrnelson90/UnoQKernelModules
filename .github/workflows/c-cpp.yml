@@ -10,20 +10,18 @@ jobs:
 
     steps:
     - name: Install Linux Kernel Make deps
-      run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
+      run: sudo apt-get update && sudo apt-get install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
     - name: Checkout this repository
       uses: actions/checkout@v4
     - name: Checkout kernel source repo
       uses: actions/checkout@v4
       with: 
        repository: arduino/linux-qcom
-       path: /home/runner/work/UnoQKernelModules/linux-qcom
-    - name: Inspect files in /home/runner/work/UnoQKernelModules
-      run: ls /home/runner/work/UnoQKernelModules
+       path: linux-qcom
     - name: Copy .config file to source repo  
-      run: cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b /home/runner/work/UnoQKernelModules/linux-qcom
+      run: cp /home/runner/work/UnoQKernelModules/UnoQKernelModules/config-6.16.7-g0dd6551ae96b /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom && cd /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom
     - name: Setup make configs
-      run: cd /home/runner/work/UnoQKernelModules/linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
+      run: scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
     - name: make moudules_prepare
       run: make -C . M=./drivers/usb/misc moudules_prepare
     - name: make moudules
