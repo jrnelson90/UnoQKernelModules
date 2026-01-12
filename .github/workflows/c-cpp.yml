@@ -23,7 +23,7 @@ jobs:
     - name: Setup make configs
       run: cd linux-qcom && scripts/config --set-str LOCALVERSION "-g0dd6551ae96b" && scripts/config --enable CONFIG_USB_LEGOTOWER
     - name: make prepare
-      run: cd linux-qcom && make -C . M=./drivers/usb/misc prepare
+      run: cd linux-qcom && make prepare
     - name: make modules_prepare
       run: cd linux-qcom && make -C . M=./drivers/usb/misc modules_prepare
     - name: make modules
