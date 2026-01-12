@@ -9,7 +9,7 @@ obj-m	:= legousbtower.o
 # but defaults to the build directory for the currently running kernel
 KERNELDIR = /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom
 # PWD = /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom/drivers/usb/misc
-PWD = $(shell PWD)
+PWD = $(shell pwd)
 
 # Define targets: 'all' to build the module, 'clean' to remove generated files
 all:
