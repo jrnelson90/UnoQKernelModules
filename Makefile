@@ -8,7 +8,8 @@ obj-m	:= onboard_usb_dev.o
 # KERNELDIR can be overridden on the command line, 
 # but defaults to the build directory for the currently running kernel
 KERNELDIR = /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom
-PWD = $(shell $PWD)
+PWD = /home/runner/work/UnoQKernelModules/UnoQKernelModules/linux-qcom/drivers/usb/misc
+# PWD = $(shell PWD)
 
 # Define targets: 'all' to build the module, 'clean' to remove generated files
 all:
