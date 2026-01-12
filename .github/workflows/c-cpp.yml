@@ -12,7 +12,7 @@ jobs:
     - name: Download
       run: git clone https://github.com/arduino/linux-qcom.git && cd linux-qcom
     - name: Install deps
-      run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev kernel-package fakeroot xz-utils git dwarves rsync
+      run: sudo apt update && sudo apt install build-essential bc bison flex libssl-dev libncurses5-dev libelf-dev fakeroot xz-utils git dwarves rsync
     - name: make
       run: make
     - name: make check
