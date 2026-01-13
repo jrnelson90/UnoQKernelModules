@@ -50,3 +50,9 @@ jobs:
       with:
         name: linux-libc-dev-6.16.7-g0dd6551ae96b.deb
         path: ./linux-libc-dev*.deb
+          path: ./linux-image-*-dbg_*.deb
+    - name: Upload linux kernel driver module for LEGO USB Tower as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: legotowerusb.ko
+        path: ./linux-qcom/drivers/usb/misc/legousbtower.ko
