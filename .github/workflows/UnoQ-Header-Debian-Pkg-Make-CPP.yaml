@@ -29,7 +29,7 @@ jobs:
     - name: make modules_prepare
       run: cd linux-qcom && make modules_prepare
     - name: make and create .deb packages for headers, image, and libc-dev
-      run: nice make -j$(nproc) -C ./linux-qcom bindeb-pkg && ls linux-*.deb && modinfo /linux-qcom/drivers/usb/misc/legousbtower.ko
+      run: nice make -j$(nproc) -C ./linux-qcom bindeb-pkg && ls linux-*.deb && modinfo ./linux-qcom/drivers/usb/misc/legousbtower.ko
     - name: Upload linux kernel headers .deb packages as artifacts
       uses: actions/upload-artifact@v4
       with:
