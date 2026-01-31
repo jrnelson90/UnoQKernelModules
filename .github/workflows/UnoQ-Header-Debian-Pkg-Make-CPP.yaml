@@ -23,13 +23,13 @@ jobs:
     - name: Copy .config file to source repo  
       run: cp config-6.16.7-g0dd6551ae96b ./linux-qcom/.config
     - name: Setup make configs
-      run: cd linux-qcom && scripts/config --module CONFIG_USB_LEGOTOWER
+      run: cd linux-qcom && scripts/config --module CONFIG_USB_LEGOTOWER && scripts/config --enable CONFIG_INPUT_JOYSTICK && scripts/config --module CONFIG_JOYSTICK_XPAD && scripts/config --enable CONFIG_JOYSTICK_XPAD_FF && scripts/config --enable CONFIG_JOYSTICK_XPAD_LEDS
     - name: make prepare
       run: cd linux-qcom && make prepare
     - name: make modules_prepare
       run: cd linux-qcom && make modules_prepare
     - name: make and create .deb packages for headers, image, and libc-dev
-      run: nice make -j$(nproc) -C ./linux-qcom bindeb-pkg && ls linux-*.deb && modinfo ./linux-qcom/drivers/usb/misc/legousbtower.ko
+      run: nice make -j$(nproc) -C ./linux-qcom bindeb-pkg && ls linux-*.deb && modinfo ./linux-qcom/drivers/usb/misc/legousbtower.ko && modinfo ./linux-qcom/drivers/input/joystick/xpad.ko
     - name: Upload linux kernel headers .deb packages as artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -55,3 +55,8 @@ jobs:
       with:
         name: legotowerusb.ko
         path: ./linux-qcom/drivers/usb/misc/legousbtower.ko
+    - name: Upload linux kernel driver module for XBOX USB Controllers as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: legotowerusb.ko
+        path: ./linux-qcom/drivers/input/joystick/xpad.ko
